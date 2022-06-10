@@ -1,0 +1,27 @@
+<div class="dashboard-container">
+
+    <div *ngIf="showNewForm" class="card-center">
+        <app-new-recipe-form></app-new-recipe-form>
+    </div>
+
+    <div *ngIf="showRecipeList" class="page-center">
+
+        <h3>Recipe List</h3>
+
+        <div class="col-md-12">
+            <div class="list-container list-group">
+                <div *ngFor="let item of recipeCollection" (click)="selectRecipe(item)" class="recipe-list-item list-group-item">
+                    <h4>{{ item.title }}</h4>
+                </div>    
+            </div>
+        </div>
+
+        <button class="button btn btn-success" (click)="showAddRecipe()">Add Recipe</button>
+
+    </div>
+
+    <div *ngIf="showDetailedRecipe">
+
+    </div>
+
+</div>

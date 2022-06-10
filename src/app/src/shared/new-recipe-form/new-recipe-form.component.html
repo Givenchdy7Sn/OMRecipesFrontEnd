@@ -1,0 +1,73 @@
+<div class="card-container">
+
+    <h3>New Recipe</h3>
+
+    <form (ngSubmit)="saveRecipe()">
+
+        <div class="row">
+            <label class="input-title col-md-12">
+                Recipe Title
+                <input class="text-center" type="text" name="recipeTitle" [required]="true" [(ngModel)]="recipe.recipeTitle" />
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="input-title col-md-12">
+                Meal Type
+                <select name="mealType" [(ngModel)]="recipe.mealType">
+                    <option name="mealType" value="">Please select</option>
+                    <option *ngFor="let item of mealTypes" name="mealType" value="{{item}}">{{item}}</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="input-title col-md-12">
+                People Served
+                <input type="number" name="peopleServed" [(ngModel)]="recipe.peopleServed">
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="input-title col-md-12">
+                Difficulty Level
+                <select name="difficultyLevel" [(ngModel)]="recipe.difficultyLevel">
+                    <option type="text" value="" name="difficultyLevel" [(ngModel)]="recipe.difficultyLevel">Please select</option>
+                    <option type="text" *ngFor="let item of levels" value="{{item}}" name="difficultyLevel" [(ngModel)]="recipe.difficultyLevel">{{item}}</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="input-title col-md-12">
+                Steps (Separate steps by new line)
+                <textarea name="instructions" [(ngModel)]="recipe.instructions">
+                </textarea>
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="input-title col-md-6">
+                Ingredient
+                <input type="text" name="ingredient" [(ngModel)]="ingredientName"/>
+            </label>
+
+            <label class="input-title col-md-6">
+                Measurement unit
+                <select name="ingredientUnit" [(ngModel)]="ingredientUnit">
+                    <option type="text" value="" name="ingredientUnit" [(ngModel)]="ingredientUnit">Select measurement</option>
+                    <option type="text" *ngFor="let unit of measurementUnits" value="{{unit}}" name="ingredientUnit" [(ngModel)]="ingredientUnit">{{unit}}</option>
+                </select>
+            </label>
+
+        </div>
+
+        <button class="btn button btn-info" (click)="saveIngredient()">Save ingredient</button>
+
+        <p>print ingredients here</p>
+
+        <button type="submit" class="button btn btn-success">Save Recipe</button>
+
+    </form>
+
+</div>

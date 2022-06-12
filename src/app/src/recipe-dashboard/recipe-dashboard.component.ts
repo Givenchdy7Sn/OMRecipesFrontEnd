@@ -12,6 +12,8 @@ export class RecipeDashboardComponent implements OnInit {
   showRecipeList: boolean = true;
   showDetailedRecipe: boolean = false;
   recipeCollection: any = [];
+  viewFullRecipe: boolean = false;
+  selectedDetailedRecipe: any = null;
 
   constructor(public api: ApiService) { }
 
@@ -25,16 +27,22 @@ export class RecipeDashboardComponent implements OnInit {
   fetchRecipeCollection() {
 
     this.api.getRecipes().subscribe((response: any) => {
-      this.recipeCollection = response.data;
+      if (response.data) {
+        this.recipeCollection = response.data;
+      }
     });
 
   }
 
   selectRecipe(recipe: any) {
 
-    this.api.getRecipeByID(recipe.id).subscribe((response) => {
+    this.api.getRecipeByID(recipe.id).subscribe((response: any) => {
 
       console.log('whole item - now show full item using template', response);
+      if (response.data) {
+        this.viewFullRecipe = true;
+        this.selectedDetailedRecipe = response.data;
+      }
   
      // this.showRecipeList = false;
       //this.showDetailedRecipe = true;

@@ -6,3 +6,17 @@
 .page-center {
     width: 50%;
 }
+
+.recipe-view {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .recipe-table {
+        margin: auto;
+    }
+
+    td {
+        padding-right: 5px;
+    }
+}

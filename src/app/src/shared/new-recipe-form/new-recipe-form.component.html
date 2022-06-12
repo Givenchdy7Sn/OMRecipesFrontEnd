@@ -2,7 +2,7 @@
 
     <h3>New Recipe</h3>
 
-    <form (ngSubmit)="saveRecipe()">
+    <form>
 
         <div class="row">
             <label class="input-title col-md-12">
@@ -60,13 +60,23 @@
                 </select>
             </label>
 
+            <label class="input-title col-md-6">
+                Amount
+                <input type="number" name="ingredientAmount" [(ngModel)]="ingredientAmount"/>
+            </label>
+
+
         </div>
 
         <button class="btn button btn-info" (click)="saveIngredient()">Save ingredient</button>
 
-        <p>print ingredients here</p>
+        <h4>Ingredients</h4>
+        <div *ngFor="let item of ingredients">
+            <p>{{ item.title }} - {{ item.amount }} {{ item.unit }}</p>
+        </div>
 
-        <button type="submit" class="button btn btn-success">Save Recipe</button>
+        <p [ngClass]="{'error-message': error === true, 'success-message': error === false}" *ngIf="message != '' ">{{message}}</p>
+        <button type="submit" (click)="saveRecipe()" class="button btn btn-success">Save Recipe</button>
 
     </form>
 

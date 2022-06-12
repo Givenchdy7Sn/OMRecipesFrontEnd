@@ -6,13 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  static baseUrl: string = 'http://localhost:3000/api/om/recipe';
+  static baseUrl: string = 'http://13.246.6.227:3000/api/om/recipe';
 
   constructor(private http: HttpClient) { }
 
   getRecipes() {
-
-    console.log('prepare service call');
     return this.http.get(`${ApiService.baseUrl}/collection`);
   }
 
@@ -21,13 +19,15 @@ export class ApiService {
     return this.http.get(`${ApiService.baseUrl}/${recipeId}`);
   }
 
-  createRecipe(data: any, ingredients: any) {
+  createRecipe(data: any) {
 
     return this.http.post(`${ApiService.baseUrl}`, {
       title: data.recipeTitle,
       difficultyLevel: data.difficultyLevel,
       peopleServed: data.peopleServed,
-      mealType: data.mealType
+      mealType: data.mealType,
+      steps: data.steps,
+      ingredients: data.ingredients
     }, {
       headers: {
         'Content-Type': 'application/json'

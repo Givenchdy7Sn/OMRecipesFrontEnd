@@ -15,6 +15,9 @@ export class NewRecipeFormComponent implements OnInit {
 
   ingredientName: string = '';
   ingredientUnit: string = '';
+  ingredientAmount: string = '';
+  message: string = '';
+  error: boolean = false;
 
   recipe = {
     recipeTitle: '',
@@ -22,6 +25,8 @@ export class NewRecipeFormComponent implements OnInit {
     difficultyLevel: '',
     peopleServed: '',
     instructions: '',
+    steps: [],
+    ingredients: []
   };
 
   ingredients: any = [];
@@ -40,17 +45,37 @@ export class NewRecipeFormComponent implements OnInit {
 
     this.ingredients.push({
       title: this.ingredientName,
-      unit: this.ingredientUnit
-    })
+      unit: this.ingredientUnit,
+      amount: this.ingredientAmount
+    });
+
+    this.ingredientName = '';
+    this.ingredientUnit = '';
+    this.ingredientAmount = '';
   }
 
   saveRecipe() {
 
-    console.log('data here', this.recipe);
+    var stepsTemp = this.recipe.instructions.split('\n');
+    var steps: any = [];
 
-    this.api.createRecipe(this.recipe, this.ingredients).subscribe((response) => {
+    for (let i = 0; i < stepsTemp.length; i++) {
+      var step = {
+        description: stepsTemp[i],
+        stepNumber: i + 1,
+      }
+      steps.push(step);
+    }
 
-      console.log('api response', response);
+    this.recipe.steps = steps;
+    this.recipe.ingredients = this.ingredients;
+
+    this.api.createRecipe(this.recipe).subscribe((response: any) => {
+        this.message = response.message;
+        this.error = false;
+    }, (err) => {
+      this.error = true;
+      this.message = err.error.message;
     });
 
   }
